@@ -36,7 +36,7 @@ def main():
         relation_index = { relation : i for i, relation in enumerate(relations) }
 
     # Load the datasets
-    print 'Loading the dataset...'
+    print ('Loading the dataset...')
     train_set = load_dataset(args.dataset_prefix + '/train.tsv', relations)
     val_set = load_dataset(args.dataset_prefix + '/val.tsv', relations)
     test_set = load_dataset(args.dataset_prefix + '/test.tsv', relations)
@@ -44,27 +44,27 @@ def main():
     y_val = [relation_index[label] for label in val_set.values()]
     y_test = [relation_index[label] for label in test_set.values()]
     dataset_keys = train_set.keys() + val_set.keys() + test_set.keys()
-    print 'Done!'
+    print ('Done!')
 
     # Load the resource (processed corpus)
-    print 'Loading the corpus...'
+    print ('Loading the corpus...')
     corpus = KnowledgeResource(args.corpus_prefix)
-    print 'Done!'
+    print ('Done!')
 
     # Get the vocabulary
     vocabulary = get_vocabulary(corpus, dataset_keys)
 
     # Load the word embeddings
-    print 'Initializing word embeddings...'
+    print ('Initializing word embeddings...')
     word_vectors, word_index = load_embeddings(args.embeddings_file, vocabulary)
     word_inverted_index = { i : w for w, i in word_index.iteritems() }
 
     # Load the paths and create the feature vectors
-    print 'Loading path files...'
+    print ('Loading path files...')
     x_y_vectors, dataset_instances, pos_index, dep_index, dir_index, pos_inverted_index, dep_inverted_index, \
     dir_inverted_index = load_paths_and_word_vectors(corpus, dataset_keys, word_index)
-    print 'Number of words %d, number of pos tags: %d, number of dependency labels: %d, number of directions: %d' % \
-          (len(word_index), len(pos_index), len(dep_index), len(dir_index))
+    print ('Number of words %d, number of pos tags: %d, number of dependency labels: %d, number of directions: %d' % \
+          (len(word_index), len(pos_index), len(dep_index), len(dir_index)))
 
     X_train = dataset_instances[:len(train_set)]
     X_val = dataset_instances[len(train_set):len(train_set)+len(val_set)]
@@ -92,13 +92,13 @@ def main():
                                             dropout=word_dropout_rate, alpha=alpha, use_xy_embeddings=True,
                                             num_hidden_layers=args.num_hidden_layers)
 
-            print 'Training with learning rate = %f, dropout = %f...' % (alpha, word_dropout_rate)
+            print ('Training with learning rate = %f, dropout = %f...' % (alpha, word_dropout_rate))
             classifier.fit(X_train, y_train, x_y_vectors=x_y_vectors_train)
 
             pred = classifier.predict(X_val, x_y_vectors=x_y_vectors_val)
             precision, recall, f1, support = evaluate(y_val, pred, relations, do_full_reoprt=False)
-            print 'Learning rate = %f, dropout = %f, Precision: %.3f, Recall: %.3f, F1: %.3f' % \
-                  (alpha, word_dropout_rate, precision, recall, f1)
+            print ('Learning rate = %f, dropout = %f, Precision: %.3f, Recall: %.3f, F1: %.3f' % \
+                  (alpha, word_dropout_rate, precision, recall, f1))
             f1_results.append(f1)
             models.append(classifier)
 
@@ -110,17 +110,17 @@ def main():
     best_index = np.argmax(f1_results)
     classifier = models[best_index]
     description = descriptions[best_index]
-    print 'Best hyper-parameters: ' + description
+    print ('Best hyper-parameters: ' + description)
 
     # Save the best model to a file
-    print 'Saving the model...'
+    print ('Saving the model...')
     classifier.save_model(args.model_prefix_file, [word_index, pos_index, dep_index, dir_index])
 
     # Evaluate on the test set
-    print 'Evaluation:'
+    print ('Evaluation:')
     pred = classifier.predict(X_test, x_y_vectors=x_y_vectors_test)
     precision, recall, f1, support = evaluate(y_test, pred, relations, do_full_reoprt=True)
-    print 'Precision: %.3f, Recall: %.3f, F1: %.3f' % (precision, recall, f1)
+    print ('Precision: %.3f, Recall: %.3f, F1: %.3f' % (precision, recall, f1))
 
     # Write the predictions to a file
     output_predictions(args.model_prefix_file + '.predictions', relations, pred, test_set.keys(), y_test)
@@ -191,17 +191,17 @@ def load_paths_and_word_vectors(corpus, dataset_keys, lemma_index):
     paths = [ { p : c for p, c in paths_x_to_y[i].iteritems() if p is not None } for i in range(len(keys)) ]
 
     empty = [dataset_keys[i] for i, path_list in enumerate(paths) if len(path_list.keys()) == 0]
-    print 'Pairs without paths:', len(empty), ', all dataset:', len(dataset_keys)
+    print ('Pairs without paths:', len(empty), ', all dataset:', len(dataset_keys))
 
-    # Get the word embeddings for x and y (get a lemma index)
-    print 'Getting word vectors for the terms...'
+    # Get the word embeddings for x and y (get a lemma inde)x)
+    print ('Getting word vectors for the terms...')
     x_y_vectors = [(lemma_index.get(x, 0), lemma_index.get(y, 0)) for (x, y) in dataset_keys]
 
     pos_inverted_index = { i : p for p, i in pos_index.iteritems() }
     dep_inverted_index = { i : p for p, i in dep_index.iteritems() }
     dir_inverted_index = { i : p for p, i in dir_index.iteritems() }
 
-    print 'Done loading corpus data!'
+    print ('Done loading corpus data!')
 
     return x_y_vectors, paths, pos_index, dep_index, dir_index, pos_inverted_index, dep_inverted_index, \
            dir_inverted_index

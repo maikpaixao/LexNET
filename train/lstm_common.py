@@ -60,7 +60,7 @@ def vectorize_edge(edge, lemma_index, pos_index, dep_index, dir_index):
     return tuple([lemma, pos, dep, direction])
 
 
-def reconstruct_edge((lemma, pos, dep, direction),
+def reconstruct_edge(tup,
                      lemma_inverted_index, pos_inverted_index, dep_inverted_index, dir_inverted_index):
     """
     Return a string representation of the edge
@@ -70,6 +70,7 @@ def reconstruct_edge((lemma, pos, dep, direction),
     :param dir_inverted_index: edge direction to index dictionary
     :return: The string representation of the edge
     """
+    (lemma, pos, dep, direction) = tup
     edge = '/'.join([lemma_inverted_index[lemma], pos_inverted_index[pos], dep_inverted_index[dep],
                      dir_inverted_index[direction]])
     return edge
@@ -100,7 +101,7 @@ def load_embeddings(file_name, vocabulary):
     wv = np.vstack((wv, unknown_word_vectors))
     words = list(words) + unknown_words
 
-    print 'Known lemmas:', len(vocabulary) - len(unknown_words), '/', len(vocabulary)
+    print ('Known lemmas:', len(vocabulary) - len(unknown_words), '/', len(vocabulary))
 
     # Normalize each row (word vector) in the matrix to sum-up to 1
     row_norm = np.sum(np.abs(wv) ** 2, axis=-1) ** (1. / 2)

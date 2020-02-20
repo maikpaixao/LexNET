@@ -34,7 +34,7 @@ def main():
                 try:
                     x, y, path = line.strip().split('\t')
                 except:
-                    print line
+                    print (line)
                     continue
 
                 # Frequent path

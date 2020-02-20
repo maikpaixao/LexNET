@@ -71,22 +71,22 @@ class PathLSTMClassifier(BaseEstimator):
             self.lemma_embeddings_dim = LEMMA_DIM
 
         # Create the network
-        print 'Creating the network...'
+        print ('Creating the network...')
         self.builder, self.model, self.model_parameters = create_computation_graph(self.num_lemmas, self.num_pos,
                                                                                    self.num_dep, self.num_directions,
                                                                                    self.num_relations, self.lemma_vectors,
                                                                                    use_xy_embeddings, self.num_hidden_layers,
                                                                                    self.lemma_embeddings_dim)
-        print 'Done!'
+        print ('Done!')
 
     def fit(self, X_train, y_train, x_y_vectors=None):
         """
         Train the model
         """
-        print 'Training the model...'
+        print ('Training the model...')
         train(self.builder, self.model, self.model_parameters, X_train, y_train, self.n_epochs, self.alpha, self.update,
               self.dropout, x_y_vectors, self.num_hidden_layers)
-        print 'Done!'
+        print ('Done!')
 
     def save_model(self, output_prefix, dictionaries):
         """
@@ -361,7 +361,7 @@ def train(builder, model, model_parameters, X_train, y_train, nepochs, alpha=0.0
         # trainer.update_epoch()
         trainer.update()
         total_loss /= len(y_train)
-        print 'Epoch', (epoch + 1), '/', nepochs, 'Loss =', total_loss
+        print ('Epoch', (epoch + 1), '/', nepochs, 'Loss =', total_loss)
 
         # Early stopping
         if math.fabs(previous_loss - total_loss) < LOSS_EPSILON:

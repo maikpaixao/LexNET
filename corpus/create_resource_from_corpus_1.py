@@ -31,7 +31,7 @@ def main():
     resource_prefix = args['<resource_prefix>']
 
     # Load the frequent paths
-    print 'Saving the paths...'
+    print ('Saving the paths...')
     with codecs.open(frequent_paths_file, 'r', 'utf-8') as f_in:
         frequent_paths = set([line.strip() for line in f_in])
 
@@ -51,7 +51,7 @@ def main():
     frequent_paths = None
 
     # Load the terms
-    print 'Saving the terms...'
+    print ('Saving the terms...')
     with codecs.open(terms_file, 'r', 'utf-8') as f_in:
         terms = [line.strip() for line in f_in]
 
