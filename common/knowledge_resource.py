@@ -10,6 +10,9 @@ class KnowledgeResource:
         Init the knowledge resource
         :param resource_prefix - the resource directory and file prefix
         """
+        
+        print(str(resource_prefix))
+        
         self.term_to_id = bsddb.btopen(resource_prefix + '_term_to_id.db', 'r')
         self.id_to_term = bsddb.btopen(resource_prefix + '_id_to_term.db', 'r')
         self.path_to_id = bsddb.btopen(resource_prefix + '_path_to_id.db', 'r')
