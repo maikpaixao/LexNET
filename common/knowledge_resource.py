@@ -13,7 +13,7 @@ class KnowledgeResource:
         
         
         #resource_prefix = str(resource_prefix)[10:]
-        #print(resource_prefix)
+        print(str(resource_prefix) + '_term_to_id.db')
         
         self.term_to_id = bsddb.btopen(str(resource_prefix) + '_term_to_id.db', 'r')
         self.id_to_term = bsddb.btopen(str(resource_prefix)+ '_id_to_term.db', 'r')
