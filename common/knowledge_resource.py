@@ -15,11 +15,11 @@ class KnowledgeResource:
         #resource_prefix = str(resource_prefix)[10:]
         #print(resource_prefix)
         
-        self.term_to_id = bsddb.btopen(resource_prefix + '_term_to_id.db', 'r')
-        self.id_to_term = bsddb.btopen(resource_prefix + '_id_to_term.db', 'r')
-        self.path_to_id = bsddb.btopen(resource_prefix + '_path_to_id.db', 'r')
-        self.id_to_path = bsddb.btopen(resource_prefix + '_id_to_path.db', 'r')
-        self.l2r_edges = bsddb.btopen(resource_prefix + '_l2r.db', 'r')
+        self.term_to_id = bsddb.btopen(str(resource_prefix) + '_term_to_id.db', 'r')
+        self.id_to_term = bsddb.btopen(str(resource_prefix)+ '_id_to_term.db', 'r')
+        self.path_to_id = bsddb.btopen(str(resource_prefix) + '_path_to_id.db', 'r')
+        self.id_to_path = bsddb.btopen(str(resource_prefix) + '_id_to_path.db', 'r')
+        self.l2r_edges = bsddb.btopen(str(resource_prefix) + '_l2r.db', 'r')
 
     def get_term_by_id(self, id):
         return self.id_to_term[str(id)]
