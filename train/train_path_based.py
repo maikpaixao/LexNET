@@ -71,7 +71,8 @@ def main():
     X_test = dataset_instances[len(train_set)+len(val_set):]
 
     # Tune the hyper-parameters using the validation set
-    alphas = [0.001]
+    #alphas = [0.001]
+    alphas = [0.1]
     word_dropout_rates = [0.0, 0.2, 0.4]
     f1_results = []
     models = []
