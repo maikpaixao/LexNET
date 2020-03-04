@@ -173,15 +173,15 @@ class PathLSTMClassifier(BaseEstimator):
                     W2 = dy.parameter(model_parameters['W2'])
                     b2 = dy.parameter(model_parameters['b2'])
                     
-            print(lemma_lookup)
-            print(pos_lookup)
-            print(dep_lookup)
-            print(dir_lookup)
-            print(path)
+           #print(lemma_lookup)
+            print(pos_lookup.npvalue())
+            #print(dep_lookup)
+            #print(dir_lookup)
+            #print(path)
 
             path_embedding = get_path_embedding(builder, lemma_lookup, pos_lookup, dep_lookup, dir_lookup, path)
 
-            print(path_embedding)
+            print(path_embedding.npvalue())
 
             if self.use_xy_embeddings:
                 zero_word = dy.inputVector([0.0] * self.lemma_embeddings_dim)
