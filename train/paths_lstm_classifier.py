@@ -35,8 +35,8 @@ MINIBATCH_SIZE = 100
 
 class PathLSTMClassifier(BaseEstimator):
 
-    def __init__(self, num_lemmas, num_pos, num_dep, num_directions=5, n_epochs=2, num_relations=2,
-                 alpha=0.1, lemma_embeddings=None, dropout=0.0, use_xy_embeddings=False, num_hidden_layers=0):
+    def __init__(self, num_lemmas, num_pos, num_dep, num_directions=5, n_epochs=10, num_relations=2,
+                 alpha=0.001, lemma_embeddings=None, dropout=0.0, use_xy_embeddings=False, num_hidden_layers=0):
         """'
         Initialize the LSTM
         :param num_lemmas Number of distinct lemmas
