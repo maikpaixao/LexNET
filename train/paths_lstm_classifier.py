@@ -172,8 +172,16 @@ class PathLSTMClassifier(BaseEstimator):
                 if self.num_hidden_layers == 1:
                     W2 = dy.parameter(model_parameters['W2'])
                     b2 = dy.parameter(model_parameters['b2'])
+                    
+            print(lemma_lookup)
+            print(pos_lookup)
+            print(dep_lookup)
+            print(dir_lookup)
+            print(path)
 
             path_embedding = get_path_embedding(builder, lemma_lookup, pos_lookup, dep_lookup, dir_lookup, path)
+
+            print(path_embedding)
 
             if self.use_xy_embeddings:
                 zero_word = dy.inputVector([0.0] * self.lemma_embeddings_dim)
@@ -227,10 +235,10 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
     dep_lookup = model_parameters['dep_lookup']
     dir_lookup = model_parameters['dir_lookup']
     
-    print(lemma_lookup)
-    print(pos_lookup)
-    print(dep_lookup)
-    print(dir_lookup)
+    #print(lemma_lookup)
+    #print(pos_lookup)
+    #print(dep_lookup)
+    #print(dir_lookup)
 
     # Use the LSTM output vector and feed it to the MLP
 
@@ -376,7 +384,6 @@ def train(builder, model, model_parameters, X_train, y_train, nepochs, alpha=0.0
 
         previous_loss = total_loss
 
-
 def create_computation_graph(num_lemmas, num_pos, num_dep, num_directions, num_relations,
                              wv=None, use_xy_embeddings=False, num_hidden_layers=0, lemma_dimension=50):
     """
@@ -433,7 +440,6 @@ def create_computation_graph(num_lemmas, num_pos, num_dep, num_directions, num_r
     model_parameters['dir_lookup'] = model.add_lookup_parameters((num_directions, DIR_DIM))
 
     return builder, model, model_parameters
-
 
 def load_model(model_file_prefix):
     """

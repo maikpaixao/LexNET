@@ -25,7 +25,6 @@ from paths_lstm_classifier import PathLSTMClassifier
 
 EMBEDDINGS_DIM = 50
 
-
 def main():
 
     np.random.seed(133)
