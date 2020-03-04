@@ -226,6 +226,11 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
     pos_lookup = model_parameters['pos_lookup']
     dep_lookup = model_parameters['dep_lookup']
     dir_lookup = model_parameters['dir_lookup']
+    
+    print(lemma_lookup)
+    print(pos_lookup)
+    print(dep_lookup)
+    print(dir_lookup)
 
     # Use the LSTM output vector and feed it to the MLP
 
@@ -241,6 +246,8 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
                                                      dir_lookup, path, update, dropout) * count
                        for path, count in instance.iteritems()]
     input_vec = dy.esum(path_embbedings) * (1.0 / num_paths)
+    
+    print(input_vec)
 
     # Concatenate x and y embeddings
     if x_y_vectors is not None:
