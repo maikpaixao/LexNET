@@ -23,8 +23,8 @@ from sklearn.base import BaseEstimator
 
 NUM_LAYERS = 2
 LSTM_HIDDEN_DIM = 60
-LEMMA_DIM = 100 #LIS WE
-#LEMMA_DIM = 50 #GLOVE WE
+#LEMMA_DIM = 100 #LIS WE
+LEMMA_DIM = 50 #GLOVE WE
 POS_DIM = 4
 DEP_DIM = 5
 DIR_DIM = 1

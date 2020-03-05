@@ -37,6 +37,8 @@ def vectorize_path(path, lemma_index, pos_index, dep_index, dir_index):
 
     if None in path_edges:
         return None
+    
+    print(str(tuple(path_edges)))
 
     return tuple(path_edges)
 
@@ -86,6 +88,7 @@ def load_embeddings(file_name, vocabulary):
     with codecs.open(file_name, 'r', 'utf-8') as f_in:
         words, vectors = zip(*[line.strip().split(' ', 1) for line in f_in])
     wv = np.loadtxt(vectors)
+    #wv = np.genfromtxt(vectors) # handle missing values
 
     # Add the unknown words
     unknown_vector = np.random.random_sample((wv.shape[1],))
