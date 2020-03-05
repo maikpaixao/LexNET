@@ -255,7 +255,7 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
                        for path, count in instance.iteritems()]
     input_vec = dy.esum(path_embbedings) * (1.0 / num_paths)
     
-    print(input_vec)
+    #print(input_vec)
 
     # Concatenate x and y embeddings
     if x_y_vectors is not None:
