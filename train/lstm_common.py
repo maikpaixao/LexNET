@@ -2,6 +2,7 @@ import codecs
 import itertools
 
 import numpy as np
+from gensim.models import KeyedVectors
 
 np.random.seed(133)
 
@@ -38,7 +39,7 @@ def vectorize_path(path, lemma_index, pos_index, dep_index, dir_index):
     if None in path_edges:
         return None
     
-    print(str(tuple(path_edges)))
+    # print(str(tuple(path_edges))) # retorna uma tupla contendo as posições dos componentes
 
     return tuple(path_edges)
 
@@ -87,8 +88,9 @@ def load_embeddings(file_name, vocabulary):
     """
     with codecs.open(file_name, 'r', 'utf-8') as f_in:
         words, vectors = zip(*[line.strip().split(' ', 1) for line in f_in])
-    wv = np.loadtxt(vectors)
+    #wv = np.loadtxt(vectors)
     #wv = np.genfromtxt(vectors) # handle missing values
+    wv = KeyedVectors.load_word2vec_format(vectors, binary=True, unicode_errors='ignore')
 
     # Add the unknown words
     unknown_vector = np.random.random_sample((wv.shape[1],))
@@ -152,4 +154,7 @@ def get_paths(corpus, x, y):
     paths = {corpus.get_path_by_id(path): count for (path, count) in x_to_y_paths.iteritems()}
     paths.update({corpus.get_path_by_id(path).replace('X/', '@@@').replace('Y/', 'X/').replace('@@@', 'Y/'): count
                   for (path, count) in y_to_x_paths.iteritems()})
+    
+    #print(str(paths)) # paths completos
+    
     return paths
