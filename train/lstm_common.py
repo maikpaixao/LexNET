@@ -91,9 +91,9 @@ def load_embeddings(file_name, vocabulary):
     """
     with codecs.open(file_name, 'r', 'utf-8') as f_in:
         words, vectors = zip(*[line.strip().split(' ', 1) for line in f_in])
-    #wv = np.loadtxt(vectors)
+    wv = np.loadtxt(vectors)
     #wv = np.genfromtxt(vectors) # handle missing values
-    wv = KeyedVectors.load_word2vec_format(vectors, binary=True, unicode_errors='ignore', encoding='latin-1')
+    #wv = KeyedVectors.load_word2vec_format(vectors, binary=True, unicode_errors='ignore', encoding='latin-1')
 
     # Add the unknown words
     unknown_vector = np.random.random_sample((wv.shape[1],))
