@@ -1,3 +1,5 @@
+# -*-coding:Latin-1 -*
+
 import math
 import json
 from __main__ import args
