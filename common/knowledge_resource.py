@@ -11,9 +11,8 @@ class KnowledgeResource:
         :param resource_prefix - the resource directory and file prefix
         """
         
-        
         #resource_prefix = str(resource_prefix)[10:]
-        print(str(resource_prefix) + '_term_to_id.db')
+        #print(str(resource_prefix) + '_term_to_id.db')
         
         self.term_to_id = bsddb.btopen(str(resource_prefix) + '_term_to_id.db', 'r')
         self.id_to_term = bsddb.btopen(str(resource_prefix)+ '_id_to_term.db', 'r')
@@ -43,6 +42,8 @@ class KnowledgeResource:
 
         if len(path_str) > 0:
             paths = [tuple(map(int, p.split(':'))) for p in path_str.split(',')]
+            print(paths)
             path_dict = { path : count for (path, count) in paths }
+            print(path_dict[0])
 
         return path_dict
