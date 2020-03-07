@@ -37,12 +37,14 @@ def vectorize_path(path, lemma_index, pos_index, dep_index, dir_index):
     :param dir_index: index to edge direction dictionary
     :return:
     """
+
+    print(path)
     path_edges = [vectorize_edge(edge, lemma_index, pos_index, dep_index, dir_index) for edge in path.split('_')]
 
     if None in path_edges:
         return None
     
-    print(path_edges) # retorna uma tupla contendo as posições dos componentes
+    #print(path_edges) # retorna uma tupla contendo as posições dos componentes
 
     return tuple(path_edges)
 
