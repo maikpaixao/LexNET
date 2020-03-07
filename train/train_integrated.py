@@ -169,9 +169,9 @@ def load_paths_and_word_vectors(corpus, dataset_keys, lemma_index):
     dep_index = defaultdict(count(0).next)
     dir_index = defaultdict(count(0).next)
 
-    print(pos_index)
-    print(dep_index)
-    print(dir_index)
+    #print(pos_index)
+    #print(dep_index)
+    #print(dir_index)
 
     _ = pos_index['#UNKNOWN#']
     _ = dep_index['#UNKNOWN#']
@@ -191,6 +191,9 @@ def load_paths_and_word_vectors(corpus, dataset_keys, lemma_index):
     paths_x_to_y = [{ vectorize_path(path, lemma_index, pos_index, dep_index, dir_index) : count
                       for path, count in curr_paths }
                     for curr_paths in string_paths]
+
+    print(paths_x_to_y)
+    
     paths = [ { p : c for p, c in paths_x_to_y[i].iteritems() if p is not None } for i in range(len(keys)) ]
 
     empty = [dataset_keys[i] for i, path_list in enumerate(paths) if len(path_list.keys()) == 0]
