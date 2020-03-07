@@ -38,7 +38,7 @@ def vectorize_path(path, lemma_index, pos_index, dep_index, dir_index):
     :return:
     """
 
-    print(path)
+    #print(path)
     path_edges = [vectorize_edge(edge, lemma_index, pos_index, dep_index, dir_index) for edge in path.split('_')]
 
     if None in path_edges:
@@ -62,6 +62,7 @@ def vectorize_edge(edge, lemma_index, pos_index, dep_index, dir_index):
     try:
         lemma, pos, dep, direction = edge.split('/')
         lemma, pos, dep, direction = lemma_index.get(lemma, 0), pos_index[pos], dep_index[dep], dir_index[direction]
+        print(lemma, pos, dep, direction)
     except:
         return None
 
