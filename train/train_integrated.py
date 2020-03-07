@@ -169,6 +169,10 @@ def load_paths_and_word_vectors(corpus, dataset_keys, lemma_index):
     dep_index = defaultdict(count(0).next)
     dir_index = defaultdict(count(0).next)
 
+    print(pos_index)
+    print(dep_index)
+    print(dir_index)
+
     _ = pos_index['#UNKNOWN#']
     _ = dep_index['#UNKNOWN#']
     _ = dir_index['#UNKNOWN#']

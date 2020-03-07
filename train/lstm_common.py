@@ -62,7 +62,7 @@ def vectorize_edge(edge, lemma_index, pos_index, dep_index, dir_index):
     try:
         lemma, pos, dep, direction = edge.split('/')
         lemma, pos, dep, direction = lemma_index.get(lemma, 0), pos_index[pos], dep_index[dep], dir_index[direction]
-        print("edge", lemma, pos, dep, direction)
+        #print("edge", lemma, pos, dep, direction)
     except:
         return None
 
