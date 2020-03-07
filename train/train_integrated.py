@@ -155,7 +155,6 @@ def get_vocabulary(corpus, dataset_keys):
     x_y_words = set([x for (x, y) in dataset_keys]).union([y for (x, y) in dataset_keys])
     return list(path_lemmas.union(x_y_words))
 
-
 def load_paths_and_word_vectors(corpus, dataset_keys, lemma_index):
     '''
     Load the paths and the word vectors for this dataset

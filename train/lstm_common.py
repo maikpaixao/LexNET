@@ -42,7 +42,7 @@ def vectorize_path(path, lemma_index, pos_index, dep_index, dir_index):
     if None in path_edges:
         return None
     
-    # print(str(tuple(path_edges))) # retorna uma tupla contendo as posições dos componentes
+    print(path_edges) # retorna uma tupla contendo as posições dos componentes
 
     return tuple(path_edges)
 
