@@ -149,7 +149,6 @@ def get_vocabulary(corpus, dataset_keys):
     path_lemmas = set([edge.split('/')[0]
                        for (x_id, y_id) in keys
                        for path in get_paths(corpus, x_id, y_id).keys()
-                       print(path)
                        for edge in path.split('_')
                        #print(edge)
                        if x_id > 0 and y_id > 0])

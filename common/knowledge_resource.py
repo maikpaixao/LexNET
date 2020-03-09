@@ -44,6 +44,7 @@ class KnowledgeResource:
             paths = [tuple(map(int, p.split(':'))) for p in path_str.split(',')]
             #print(paths)
             path_dict = { path : count for (path, count) in paths }
-            #print(path_dict)
+
+        print(path_dict)
 
         return path_dict
