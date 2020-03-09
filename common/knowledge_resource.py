@@ -45,6 +45,6 @@ class KnowledgeResource:
             #print(paths)
             path_dict = { path : count for (path, count) in paths }
 
-        print(path_dict)
+        #print(path_dict)
 
         return path_dict
