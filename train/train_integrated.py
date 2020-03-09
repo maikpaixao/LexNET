@@ -197,7 +197,7 @@ def load_paths_and_word_vectors(corpus, dataset_keys, lemma_index):
     
     paths = [ { p : c for p, c in paths_x_to_y[i].iteritems() if p is not None } for i in range(len(keys)) ]
 
-    #print(paths) path not none
+    print(paths) path not none
 
     empty = [dataset_keys[i] for i, path_list in enumerate(paths) if len(path_list.keys()) == 0]
     print ('Pairs without paths:', len(empty), ', all dataset:', len(dataset_keys))
