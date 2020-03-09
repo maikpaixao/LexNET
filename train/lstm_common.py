@@ -161,6 +161,6 @@ def get_paths(corpus, x, y):
     paths.update({corpus.get_path_by_id(path).replace('X/', '@@@').replace('Y/', 'X/').replace('@@@', 'Y/'): count
                   for (path, count) in y_to_x_paths.iteritems()})
     
-    #print(str(paths)) # paths completos
+    print(str(paths)) # paths completos
     
     return paths
