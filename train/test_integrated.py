@@ -11,7 +11,6 @@ ap.add_argument('model_prefix_file', help='where to store the result')
 
 args = ap.parse_args()
 
-
 sys.path.append('../common')
 
 from evaluation_common import *

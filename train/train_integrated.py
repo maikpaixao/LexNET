@@ -123,7 +123,7 @@ def main():
     print ('Evaluation:')
     pred = classifier.predict(X_test, x_y_vectors=x_y_vectors_test)
     precision, recall, f1, support = evaluate(y_test, pred, relations, do_full_reoprt=True)
-    print ('Precision: %.3f, Recall: %.3f, F1: %.3f' % (precision, recall, f1))
+    print ('Precision: %\.3f, Recall: %\.3f, F1: %\.3f' % (precision, recall, f1))
 
     # Write the predictions to a file
     output_predictions(args.model_prefix_file + '.predictions', relations, pred, test_set.keys(), y_test)
