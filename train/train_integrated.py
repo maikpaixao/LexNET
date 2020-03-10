@@ -66,7 +66,7 @@ def main():
     print ('Number of words %d, number of pos tags: %d, number of dependency labels: %d, number of directions: %d' % \
           (len(word_index), len(pos_index), len(dep_index), len(dir_index)))
 
-    X_train = dataset_instances[:len(train_set)]
+    X_train = dataset_instances[:len(train_set)] #dataset_instances são os paths em forma de texto e não relations
     X_val = dataset_instances[len(train_set):len(train_set)+len(val_set)]
     X_test = dataset_instances[len(train_set)+len(val_set):]
 
@@ -116,6 +116,7 @@ def main():
     print ('Saving the model...')
     classifier.save_model(args.model_prefix_file, [word_index, pos_index, dep_index, dir_index])
 
+    '''
     # Evaluate on the test set
     print ('Evaluation:')
     pred = classifier.predict(X_test, x_y_vectors=x_y_vectors_test)
@@ -135,6 +136,7 @@ def main():
                 path_str = '_'.join([reconstruct_edge(edge, word_inverted_index, pos_inverted_index,
                                                       dep_inverted_index, dir_inverted_index) for edge in path])
                 print >> f_out, '\t'.join([path_str, str(score)])
+    '''
 
 
 def get_vocabulary(corpus, dataset_keys):
@@ -197,7 +199,7 @@ def load_paths_and_word_vectors(corpus, dataset_keys, lemma_index):
     
     paths = [ { p : c for p, c in paths_x_to_y[i].iteritems() if p is not None } for i in range(len(keys)) ]
 
-    print(paths) #path not none
+    #print(paths) #retorna lista de tuplas representando o path pelos id's de seus dicionários. E.g. (403200, 2, 3, 1)
 
     empty = [dataset_keys[i] for i, path_list in enumerate(paths) if len(path_list.keys()) == 0]
     print ('Pairs without paths:', len(empty), ', all dataset:', len(dataset_keys))
@@ -210,9 +212,9 @@ def load_paths_and_word_vectors(corpus, dataset_keys, lemma_index):
     dep_inverted_index = { i : p for p, i in dep_index.iteritems() }
     dir_inverted_index = { i : p for p, i in dir_index.iteritems() }
 
-    print(dep_inverted_index)
-    print(dep_inverted_index)
-    print(dir_inverted_index)
+    #print(dep_inverted_index) #invertido o dicionário
+    #print(dep_inverted_index)
+    #print(dir_inverted_index)
 
     print ('Done loading corpus data!')
 

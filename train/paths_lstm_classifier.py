@@ -360,7 +360,7 @@ def train(builder, model, model_parameters, X_train, y_train, nepochs, alpha=0.0
 
         for minibatch in range(nminibatches):
 
-            path_cache = {}
+            path_cache = {}           
             batch_indices = epoch_indices[minibatch * minibatch_size:(minibatch + 1) * minibatch_size]
 
             dy.renew_cg()
