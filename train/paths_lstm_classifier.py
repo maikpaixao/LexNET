@@ -19,14 +19,14 @@ else:
 dyparams.set_mem(args.memory)
 dyparams.set_random_seed(args.seed)
 dyparams.init()
-	
+
 from lstm_common import *
 from sklearn.base import BaseEstimator
 
 NUM_LAYERS = 2
 LSTM_HIDDEN_DIM = 60
-#LEMMA_DIM = 300 #LIS WE
-LEMMA_DIM = 50 #GLOVE WE
+LEMMA_DIM = 200 #LIS WE
+#LEMMA_DIM = 50 #GLOVE WE
 POS_DIM = 4
 DEP_DIM = 5
 DIR_DIM = 1
@@ -175,7 +175,7 @@ class PathLSTMClassifier(BaseEstimator):
                 if self.num_hidden_layers == 1:
                     W2 = dy.parameter(model_parameters['W2'])
                     b2 = dy.parameter(model_parameters['b2'])
-                    
+
            #print(lemma_lookup)
             #print(pos_lookup.as_array())
             #print(dep_lookup)
@@ -237,7 +237,7 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
     pos_lookup = model_parameters['pos_lookup']
     dep_lookup = model_parameters['dep_lookup']
     dir_lookup = model_parameters['dir_lookup']
-    
+
     #print(lemma_lookup)
     #print(pos_lookup)
     #print(dep_lookup)
@@ -257,7 +257,7 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
                                                      dir_lookup, path, update, dropout) * count
                        for path, count in instance.iteritems()]
     input_vec = dy.esum(path_embbedings) * (1.0 / num_paths)
-    
+
     #print(input_vec)
 
     # Concatenate x and y embeddings
@@ -360,7 +360,7 @@ def train(builder, model, model_parameters, X_train, y_train, nepochs, alpha=0.0
 
         for minibatch in range(nminibatches):
 
-            path_cache = {}           
+            path_cache = {}
             batch_indices = epoch_indices[minibatch * minibatch_size:(minibatch + 1) * minibatch_size]
 
             dy.renew_cg()
