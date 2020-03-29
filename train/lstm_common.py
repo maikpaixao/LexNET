@@ -117,11 +117,11 @@ def load_embeddings(file_name, vocabulary):
     unknown_words = list(set(vocabulary).difference(set(words)))
 
     # Create vectors for MWEs - sum of word embeddings, and OOV words
-    unknown_word_vectors = [np.add.reduce([wv[words.index(w)] if w in word_set else unknown_vector
+    unknown_word_vectors = [np.add.reduce([wv.wv[words.index(w)] if w in word_set else unknown_vector
                                            for w in word.split(' ')])
                             for word in unknown_words]
 
-    wv = np.vstack((wv, unknown_word_vectors))
+    wv = np.vstack((wv.vectors, unknown_word_vectors))
     words = list(words) + unknown_words
 
     print ('Known lemmas:', len(vocabulary) - len(unknown_words), '/', len(vocabulary))
