@@ -111,7 +111,7 @@ def load_embeddings(file_name, vocabulary):
     print("Done!")
 
     # Add the unknown words
-    unknown_vector = np.random.random_sample((wv.shape[1],))
+    unknown_vector = np.random.random_sample((wv.vectors.shape[1],))
 
     word_set = set(words)
     unknown_words = list(set(vocabulary).difference(set(words)))
