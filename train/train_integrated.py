@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 import sys
@@ -5,7 +6,7 @@ import argparse
 
 ap = argparse.ArgumentParser()
 ap.add_argument('-g', '--gpus', help='number of gpus to use [0,1], default=0', type=int, default=0, choices=[0,1])
-ap.add_argument('-m', '--memory', help='set dynet memory, default 8192',  default=8192)
+ap.add_argument('-m', '--memory', help='set dynet memory, default 8192',  default=16384) #memory
 ap.add_argument('-s', '--seed', help='dynet random seed, pick any integer you like, default=3016748844', default=3016748844)
 ap.add_argument('--num_hidden_layers', help='number of hidden layers to use', type=int, default=0)
 ap.add_argument('--num_epochs', help='number of epochs to train', type=int, default=5)
@@ -149,14 +150,14 @@ def get_vocabulary(corpus, dataset_keys):
     :return: a set of distinct words appearing as x or y or in a path
     '''
     keys = [(get_id(corpus, x), get_id(corpus, y)) for (x, y) in dataset_keys]
-    
+
     path_lemmas = set([edge.split('/')[0]
                        for (x_id, y_id) in keys
                        for path in get_paths(corpus, x_id, y_id).keys()
                        for edge in path.split('_')
                        #print(edge)
                        if x_id > 0 and y_id > 0])
-                       
+
     x_y_words = set([x for (x, y) in dataset_keys]).union([y for (x, y) in dataset_keys])
     return list(path_lemmas.union(x_y_words))
 
@@ -188,7 +189,7 @@ def load_paths_and_word_vectors(corpus, dataset_keys, lemma_index):
     keys = [(get_id(corpus, x), get_id(corpus, y)) for (x, y) in dataset_keys]
 
     string_paths = [get_paths(corpus, x_id, y_id).items() for (x_id, y_id) in keys]
- 
+
     # Limit number of paths
     if MAX_PATHS_PER_PAIR > 0:
         string_paths = [curr_paths[:MAX_PATHS_PER_PAIR] for curr_paths in string_paths]
@@ -198,7 +199,7 @@ def load_paths_and_word_vectors(corpus, dataset_keys, lemma_index):
                     for curr_paths in string_paths]
 
     #print(paths_x_to_y)
-    
+
     paths = [ { p : c for p, c in paths_x_to_y[i].iteritems() if p is not None } for i in range(len(keys)) ]
 
     #print(paths) #retorna lista de tuplas representando o path pelos id's de seus dicionários. E.g. (403200, 2, 3, 1)
