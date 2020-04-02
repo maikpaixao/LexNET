@@ -7,9 +7,8 @@ Created on Wed Apr  1 21:20:12 2020
 
 import pandas as pd
 import numpy as np
+from bert-serving.client import BertClient()
 
-df = pd.read_csv('BLESS/train.tsv')
+client = BertClient()
 
-percent = 0.1*len(df)
-
-print(int(percent))
+vectors = client.encode([“dog”],[“cat”],[“man”])
