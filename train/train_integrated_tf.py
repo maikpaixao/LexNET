@@ -82,6 +82,9 @@ def main():
     x_y_vectors_val = x_y_vectors[len(train_set):len(train_set)+len(val_set)]
     x_y_vectors_test = x_y_vectors[len(train_set)+len(val_set):]
 
+    print(x_y_vectors_train)
+    #print(X_train)
+
     # Tune the hyper-parameters using the validation set
     epochs = [10, 15, 20]
     word_dropout_rates = [0.0, 0.2, 0.4]
