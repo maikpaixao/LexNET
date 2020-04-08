@@ -18,7 +18,7 @@ class KnowledgeResource:
         self.id_to_term = bsddb.btopen(str(resource_prefix)+ '_id_to_term.db', 'r')
         self.path_to_id = bsddb.btopen(str(resource_prefix) + '_path_to_id.db', 'r')
         self.id_to_path = bsddb.btopen(str(resource_prefix) + '_id_to_path.db', 'r')
-        self.l2r_edges = bsddb.btopen(str(resource_prefix) + '_l2r.db', 'r')
+        self.l2r_edges = bsddb.btopen(str(resource_prefix) + '_l2r_file.db', 'r')
 
     def get_term_by_id(self, id):
         return self.id_to_term[str(id)]
