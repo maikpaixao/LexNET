@@ -317,7 +317,7 @@ def get_path_embedding(builder, lemma_lookup, pos_lookup, dep_lookup, dir_lookup
                            word_dropout(dir_lookup, edge[3], drop)])
                  for edge in path]
 
-    print(inputs)
+    print(builder.initial_state().transduce(inputs)[-1])
 
     return builder.initial_state().transduce(inputs)[-1]
 
