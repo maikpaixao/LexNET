@@ -265,7 +265,7 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
         x_vector, y_vector = dy.lookup(lemma_lookup, x_y_vectors[0]), dy.lookup(lemma_lookup, x_y_vectors[1])
         input_vec = dy.concatenate([x_vector, input_vec, y_vector])
 
-    print(input_vec)
+    print(input_vec.npvalue())
 
     h = W1 * input_vec + b1
 
