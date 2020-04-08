@@ -6,7 +6,7 @@ import argparse
 
 ap = argparse.ArgumentParser()
 ap.add_argument('-g', '--gpus', help='number of gpus to use [0,1], default=0', type=int, default=0, choices=[0,1])
-ap.add_argument('-m', '--memory', help='set dynet memory, default 8192',  default=4096) #memory
+ap.add_argument('-m', '--memory', help='set dynet memory, default 8192',  default=8192) #memory
 ap.add_argument('-s', '--seed', help='dynet random seed, pick any integer you like, default=3016748844', default=3016748844)
 ap.add_argument('--num_hidden_layers', help='number of hidden layers to use', type=int, default=0)
 ap.add_argument('--num_epochs', help='number of epochs to train', type=int, default=5)
