@@ -278,7 +278,7 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
     return output
 
 def save_embeddings(vector):
-    file = open('embeddings.txt', 'w+')
+    file = open('embeddings.txt', 'a+')
     file.write(vector)
 
 
