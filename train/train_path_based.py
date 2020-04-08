@@ -172,7 +172,7 @@ def load_paths(corpus, dataset_keys, lemma_index):
                     for (x_id, y_id) in keys]
     paths = [ { p : c for p, c in paths_x_to_y[i].iteritems() if p is not None } for i in range(len(keys)) ]
 
-    print(paths[1])
+    print(paths)
 
     empty = [dataset_keys[i] for i, path_list in enumerate(paths) if len(path_list.keys()) == 0]
     print ('Pairs without paths:', len(empty), ', all dataset:', len(dataset_keys))
