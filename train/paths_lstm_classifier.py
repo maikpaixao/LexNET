@@ -265,6 +265,8 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
         x_vector, y_vector = dy.lookup(lemma_lookup, x_y_vectors[0]), dy.lookup(lemma_lookup, x_y_vectors[1])
         input_vec = dy.concatenate([x_vector, input_vec, y_vector])
 
+    print(input_vec)
+
     h = W1 * input_vec + b1
 
     if num_hidden_layers == 1:
@@ -317,7 +319,7 @@ def get_path_embedding(builder, lemma_lookup, pos_lookup, dep_lookup, dir_lookup
                            word_dropout(dir_lookup, edge[3], drop)])
                  for edge in path]
 
-    print(1, builder.initial_state().transduce(inputs)[-1])
+    #print(1, builder.initial_state().transduce(inputs)[-1])
 
     return builder.initial_state().transduce(inputs)[-1]
 
