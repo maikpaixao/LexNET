@@ -265,7 +265,8 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
         x_vector, y_vector = dy.lookup(lemma_lookup, x_y_vectors[0]), dy.lookup(lemma_lookup, x_y_vectors[1])
         input_vec = dy.concatenate([x_vector, input_vec, y_vector])
 
-    print(input_vec.npvalue())
+    #print(input_vec.npvalue())
+    save_embeddings(str(input_vec.npvalue()))
 
     h = W1 * input_vec + b1
 
@@ -275,6 +276,10 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
     output = dy.softmax(h)
 
     return output
+
+def save_embeddings(vector):
+    file = open('embeddings.txt', 'w+')
+    file.write(vector)
 
 
 def get_path_embedding_from_cache(cache, builder, lemma_lookup, pos_lookup, dep_lookup, dir_lookup, path,
