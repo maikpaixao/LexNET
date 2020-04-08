@@ -199,7 +199,7 @@ def load_paths_and_word_vectors(corpus, dataset_keys, lemma_index):
                       for path, count in curr_paths }
                     for curr_paths in string_paths]
 
-    #print(paths_x_to_y)
+    print(paths_x_to_y)
 
     paths = [ { p : c for p, c in paths_x_to_y[i].iteritems() if p is not None } for i in range(len(keys)) ]
 
