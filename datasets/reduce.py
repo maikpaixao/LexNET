@@ -7,8 +7,10 @@ Created on Wed Apr  1 21:20:12 2020
 
 import pandas as pd
 import numpy as np
-from bert-serving.client import BertClient()
 
-client = BertClient()
+df = pd.read_csv('news.csv', encoding='latin-1')
+new_df = pd.DataFrame(columns=['news'])
 
-vectors = client.encode([“dog”],[“cat”],[“man”])
+for row in df[:10]:
+    print(row)
+
