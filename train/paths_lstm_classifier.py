@@ -282,6 +282,7 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
     return output
 
 def save_embeddings(vector):
+    '''
     if(path.exists("embeddings.csv")):
         df = pd.read_csv("embeddings.csv")
         idx = df.shape[0]
@@ -291,9 +292,9 @@ def save_embeddings(vector):
         df = pd.DataFrame(columns=["embeddings"])
         df.loc[0] = [str(vector)]
         df.to_csv("embeddings.csv")
-
-    #file = open('embedding.txt', 'a+')
-    #file.write(vector+"")
+    '''
+    file = open('embeddings.txt', 'a+')
+    file.write(np.asarray(vector))
 
 
 def get_path_embedding_from_cache(cache, builder, lemma_lookup, pos_lookup, dep_lookup, dir_lookup, path,
