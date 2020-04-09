@@ -6,6 +6,7 @@ from __main__ import args
 import os.path
 from os import path
 import pandas as pd
+import numpy as np
 
 # Support GPU, following change https://github.com/vered1986/LexNET/pull/2 from @gossebouma
 # Use CPU
@@ -284,11 +285,11 @@ def save_embeddings(vector):
     if(path.exists("embeddings.csv")):
         df = pd.read_csv("embeddings.csv")
         idx = df.shape[0]
-        df.loc[idx] = [vector]
+        df.loc[idx] = [np.array(vector)]
         df.to_csv("embeddings.csv")
     else:
         df = pd.DataFrame(columns=["embeddings"])
-        df.loc[0] = [vector]
+        df.loc[0] = [np.array(vector)]
         df.to_csv("embeddings.csv")
 
     #file = open('embedding.txt', 'a+')
