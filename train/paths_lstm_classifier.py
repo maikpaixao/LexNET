@@ -296,7 +296,7 @@ def save_embeddings(vector):
     file = open('embeddings.txt', 'a+')
     vector_list = []
     for v in vector:
-        vecor_list.append(v)
+        vector_list.append(v)
     file.write(vector_list)
 
 
