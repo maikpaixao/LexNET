@@ -270,7 +270,7 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
         input_vec = dy.concatenate([x_vector, input_vec, y_vector])
 
     #print(input_vec.npvalue())
-    save_embeddings(str(input_vec.npvalue()))
+    save_embeddings(input_vec.vec_value())
 
     h = W1 * input_vec + b1
 
@@ -282,6 +282,7 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
     return output
 
 def save_embeddings(vector):
+    '''
     if(path.exists("embeddings.csv")):
         df = pd.read_csv('embeddings.csv')
         idx = df.shape[0]
@@ -291,11 +292,14 @@ def save_embeddings(vector):
         df = pd.DataFrame(columns=['embeddings'])
         df.loc[0] = [str(np.array(vector))]
         df.to_csv("embeddings.csv")
+    '''
+    file = open('embeddings.txt', 'a+')
+    file.write(vector)
 
-    #file = open('embeddings.txt', 'a+')
     #vector_list = []
     #for v in vector:
-    #    vector_list.append(v)
+    #    print(v)
+        #vector_list.append(v)
     #file.write(vector_list)
 
 
