@@ -3,6 +3,9 @@
 import math
 import json
 from __main__ import args
+import os.path
+from os import path
+import pandas as pd
 
 # Support GPU, following change https://github.com/vered1986/LexNET/pull/2 from @gossebouma
 # Use CPU
@@ -278,8 +281,18 @@ def process_one_instance(builder, model, model_parameters, instance, path_cache,
     return output
 
 def save_embeddings(vector):
-    file = open('embeddings.txt', 'a+')
-    file.write(vector)
+    if(path.exists("embeddings.csv")):
+        df = pd.read_csv("embeddings.csv")
+        idx = df.shape[0]
+        df.loc[idx] = [vector]
+        df.to_csv("embeddings.csv")
+    else:
+        df = pd.DataFrame(columns=["embeddings"])
+        df.loc[0] = [vector]
+        df.to_csv("embeddings.csv")
+
+    #file = open('embedding.txt', 'a+')
+    #file.write(vector+"")
 
 
 def get_path_embedding_from_cache(cache, builder, lemma_lookup, pos_lookup, dep_lookup, dir_lookup, path,
