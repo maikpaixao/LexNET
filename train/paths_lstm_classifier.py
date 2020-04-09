@@ -294,7 +294,7 @@ def save_embeddings(vector):
         df.to_csv("embeddings.csv")
     '''
     file = open('embeddings.txt', 'a+')
-    vecor_list = []
+    vector_list = []
     for v in vector:
         vecor_list.append(v)
     file.write(vector_list)
