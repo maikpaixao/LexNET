@@ -294,7 +294,10 @@ def save_embeddings(vector):
         df.to_csv("embeddings.csv")
     '''
     file = open('embeddings.txt', 'a+')
-    file.write(np.array(vector))
+    vecor_list = []
+    for v in vector:
+        vecor_list.append(v)
+    file.write(vector_list)
 
 
 def get_path_embedding_from_cache(cache, builder, lemma_lookup, pos_lookup, dep_lookup, dir_lookup, path,
