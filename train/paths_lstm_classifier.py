@@ -285,11 +285,11 @@ def save_embeddings(vector):
     if(path.exists("embeddings.csv")):
         df = pd.read_csv("embeddings.csv")
         idx = df.shape[0]
-        df.loc[idx] = [np.array(vector)]
+        df.loc[idx] = [str(vector)]
         df.to_csv("embeddings.csv")
     else:
         df = pd.DataFrame(columns=["embeddings"])
-        df.loc[0] = [np.array(vector)]
+        df.loc[0] = [str(vector)]
         df.to_csv("embeddings.csv")
 
     #file = open('embedding.txt', 'a+')
